@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+
+{% block title %}Shows{% endblock %}
+    
+
+    {% block content %}
+    <div class="container bg-secondary text-white offset-1 col-10">
+        <h4 class="p-0 mb-4 display-5 text-white m-2 ps-2">All shows</h4>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Network</th>
+                    <th scope="col">Release Date</th>
+                    <th scope="col">Actions: </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for show in Shows %}
+                <tr>
+                    <td>{{show.id}}</td>
+                    <td>{{show.title}}</td>
+                    <td>{{show.networks.title}}</td>
+                    <td>{{show.release_date}}</td>
+                    <td><a href="/shows/{{show.id}}"></a> <a href="/shows/{{show.id}}/edit"> Edit </a> <a href="/shows/{{show.id}}/delete"> Delete </a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/shows/new" class="btn btn-dark ms-1 mb-4">Add a new show</a>
+    </div>
+    {% endblock %}

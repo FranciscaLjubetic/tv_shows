@@ -1,0 +1,29 @@
+1	Darwin & Gumball	A cat and his brotherfish	2021-08-17 15:08:27.681567	2021-08-17 15:08:27.681567	1	2019-08-23 04:00:00
+2	Hilda	A little girl surrounded by supernatural friends.	2021-08-17 15:11:24.159122	2021-08-17 15:11:24.159122	1	2016-08-24 03:00:00
+3	Game of Thrones	A Fictional Middle Age on the continent of Westeros. Intrigue, fantasy.	2021-08-17 15:14:23.118298	2021-08-17 15:14:23.118298	2	2010-05-13 04:00:00
+4	Barry	Gangsters.	2021-08-17 15:21:25.463037	2021-08-17 15:21:25.463037	2	2021-02-15 03:00:00
+5	Chernobyl	In April 1986, the city of Chernobyl in the Soviet Union suffers one of the worst nuclear disasters in the history of mankind. Consequently, many heroes put their lives on the line to save Europe.	2021-08-17 15:23:51.729594	2021-08-17 15:23:51.729594	2	2019-05-06 04:00:00
+6	Mandalorian	After the defeat of the Empire at the hands of Rebel forces, a lone bounty hunter operating in the Outer Rim, away from the dominion of the New Republic, goes on many surprising and risky adventures.	2021-08-17 15:26:20.950468	2021-08-17 15:26:20.950468	3	2019-11-12 03:00:00
+7	Gravity Falls	Twins Dipper and Mabel travel to the mysterious town of Gravity Falls in Oregon for their summer vacations but are shocked after they discover some strange occurrences.	2021-08-17 15:30:23.155224	2021-08-17 15:30:23.155224	3	2012-06-15 04:00:00
+8	Miraculous: Tales Of Ladybug & Cat Noir	Marinette and Adrien, both in high school, are tasked with capturing akumas, creatures that make people evil. For this, both become superheroes but they do not know each others identities.	2021-08-17 15:34:42.249052	2021-08-17 15:34:42.249052	3	2015-09-01 03:00:00
+9	Dark	When two children go missing in a small German town, its sinful past is exposed along with the double lives and fractured relationships that exist among four families as they search for the kids. The mystery-drama series introduces an intricate puzzle filled with twists that includes a web of curious characters, all of whom have a connection to the towns troubled history -- whether they know it or not. The story includes supernatural elements that tie back to the same town in 1986.	2021-08-17 15:37:51.797757	2021-08-17 15:37:51.797757	1	2017-01-12 03:00:00
+10	Stranger Things	In 1980s Indiana, a group of young friends witness supernatural forces and secret government exploits. As they search for answers, the children unravel a series of extraordinary mysteries.	2021-08-17 15:44:00.026724	2021-08-17 15:44:00.026724	1	2016-07-15 04:00:00
+
+
+Show.objects.create(title="Darwin & Gumball", release_date= "2019-08-23", description="A cat and his brotherfish", networks=network1__id)
+Show.objects.create(title="Hilda", release_date= "2016-08-24", description="A little girl surrounded by supernatural friends.", networks=network1)
+Show.objects.create(title="Game of Thrones", release_date= "2021-08-17", description="A Fictional Middle Age on the continent of Westeros. Intrigue, fantasy.", networks=network2)
+Show.objects.create(title="Barry", release_date= "2021-08-17", description="Gangsters.", networks=network2)
+Show.objects.create(title="Chernobyl", release_date= "2019-05-06", description="In April 1986, the city of Chernobyl in the Soviet Union suffers one of the worst nuclear disasters in the history of mankind. Consequently, many heroes put their lives on the line to save Europe.", networks=network2)
+Show.objects.create(title="Mandalorian", release_date= "2019-11-12", description="After the defeat of the Empire at the hands of Rebel forces, a lone bounty hunter operating in the Outer Rim, away from the dominion of the New Republic, goes on many surprising and risky adventures.", networks=network3)
+Show.objects.create(title="Gravity Falls", release_date= "2012-06-15", description="Twins Dipper and Mabel travel to the mysterious town of Gravity Falls in Oregon for their summer vacations but are shocked after they discover some strange occurrences.", networks=network3)
+Show.objects.create(title="Miraculous: Tales Of Ladybug & Cat Noir", release_date= "2015-09-01", description="Marinette and Adrien, both in high school, are tasked with capturing akumas, creatures that make people evil. For this, both become superheroes but they do not know each others identities.", networks=network3)
+Show.objects.create(title="Dark", release_date= "2017-01-12", description="When two children go missing in a small German town, its sinful past is exposed along with the double lives and fractured relationships that exist among four families as they search for the kids. The mystery-drama series introduces an intricate puzzle filled with twists that includes a web of curious characters, all of whom have a connection to the towns troubled history -- whether they know it or not. The story includes supernatural elements that tie back to the same town in 1986.", networks=network1)
+Show.objects.create(title="Stranger Things", release_date= "2016-07-15", description="In 1980s Indiana, a group of young friends witness supernatural forces and secret government exploits. As they search for answers, the children unravel a series of extraordinary mysteries.", networks=network1)
+
+Network.objects.create(title="Netflix", description="Streaming, miscelaneous")
+Network.objects.create(title="HBO", description="Streaming")
+Network.objects.create(title="Disney+", description="Streaming")
+1	Netflix	Streaming, miscelaneous	2021-08-17 03:47:50.010315	2021-08-17 03:47:50.010315
+2	HBO	Streaming	2021-08-17 03:49:15.026014	2021-08-17 03:49:15.026014
+3	Disney+	streaming	2021-08-17 03:50:47.522268	2021-08-17 03:50:47.522268

@@ -1,0 +1,58 @@
+{% extends 'index.html' %}
+
+{% block title %}New Show {% endblock %}
+
+{% block content %}
+<<form id="form" class="offset-1 col-10 bg-secondary text-white" method="POST" action="/shows/create">
+    {% csrf_token %}
+    <div class="row ps-2">
+        <div class="col-6 m-2">
+        <h4 class="p-0 mb-4 display-5 text-white">Add a Show</h4>
+            <p class="mb-0">Title</p>
+            <input name="title_input" type="text" class="validate form-control input-index input-index" required>
+        </div>
+    </div>
+    <div class="row ps-2">
+        <div class="col-6 m-2"> 
+            <p class="mb-0">Select your network</p>
+            <select name="network_input" id="network_input" class="form-control input-index mx-auto" required>
+                {% for network in Networks %}
+                <option value="{{network.id}}">{{network.title}}</option>
+                {% endfor %}
+                <option value="other">Other</option>
+            </select>
+            <input type="text" name="newNetwork" id="newNetwork" placeholder="New Network Name" class="d-none form-control"/>
+        </div>
+    </div>
+    <div class="row ps-2">
+        <div class="col-6 m-2">
+            <p class="mb-0">Release Date</p>
+            <input type="date" id="start" name="release_date_input" class="form-control input-index mx-auto"
+            value="2018-07-22"
+            min="2008-01-01" max="2021-12-31" required>
+        </div>
+    </div>
+    <div class="row ps-2">
+        <div class="col-6 m-2">
+        <p class="ms-2 mb-0">Description</p>
+            <textarea id="desc_input" name="desc_input" cols="55" rows="5" class="form-control input-index mx-auto" required>
+            </textarea>
+        </div>
+    </div>
+    <div class="row p-2">
+        <div class="col-6 ms-2 mt-1 mb-4">
+            <button type="submit" class="btn btn-dark" required>Create</button>
+        </div>
+    </div>
+</form>
+<script>
+    $("#network_input").on("change", function () {
+        if ($(this).val() === "other") {
+            $("#newNetwork").removeClass("d-none");
+        } else {
+            $("#newNetwork").addClass("d-none");
+        }
+    });
+</script>
+
+{% endblock %} 
