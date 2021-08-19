@@ -77,14 +77,12 @@ def editshow(request):
 
 
 def tvshow(request, num):
-    Shows= Show.objects.all()
-    networks = Network.objects.all()
+    this_show = Show.objects.get(id= num)
     context = {
-        'Shows': Shows,
-        'Networks': networks,
+        
+        'this_show': this_show,
     }
     
-    this_show =  Show.objects.get(show.id),
     return render(request, 'tv_show.html', context)
 
 
@@ -92,6 +90,7 @@ def delete(request, num):
     show_id= Show.objects.get(id= num)
     show_id.delete()
     return redirect('/shows')
+    
 
 def second(request, name):
     return HttpResponse('Hola ' + name)

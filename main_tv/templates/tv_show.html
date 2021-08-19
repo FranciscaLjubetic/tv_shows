@@ -3,15 +3,15 @@
 {% block title %}Tv_Show {% endblock %}
 
 {% block content %}
-<div class="container bg-secondary text-white p-2">
-    <h1>Tv Show {{this_show.title}}</h1>
+<div class="container bg-secondary text-white p-2 ms-2">
+    <h1 class="p-0 mb-4 display-5 text-white">Tv Show: {{this_show.title}}</h1>
     <h3>Network: {{this_show.networks.title}}</h3>
     <h3>Release: {{this_show.release_date}}</h3>
     <h3>Description:</h3>
     <p>{{this_show.description}}</p>
     <span>Last Update:{{this_show.updated_at}}</span>
 
-    <a href="shows/{{show.id}}/edit">Edit</a> <a href="shows/delete">Delete</a>
+    <a href="shows/{{this_show.id}}/edit">Edit</a> <a href="shows/{{this_show.id}}/delete">Delete</a>
 </div>
 
 {% endblock %}  
