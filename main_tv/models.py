@@ -1,6 +1,21 @@
 from django.db import models
+from datetime import date
 
 # Create your models here.
+class Tvshows_manager(models.Manager):
+    def basic_validator(self, post_data):
+        errors ={}
+        today = date.today()
+
+        if len(post_data['title_input']) < 2:
+            errors['title_input'] = 'Title should have at least two characters'
+        
+        if len(post_data['desc_input']) < 10:
+            errors['desc_input'] = 'Description should have at least 10 characters'
+
+        if post_data['release_date_input'] > today:
+            errors['release_date_input'] = 'The release time should be today or earlier'
+
 class Network(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
@@ -34,3 +49,6 @@ class Show(models.Model):
     #Show.objects.create(title='Miraculous: Tales Of Ladybug & Cat Noir',release_date= '2015-09-01 00:00:00', description='Marinette and Adrien, both in high school, are tasked with capturing akumas, creatures that make people evil. For this, both become superheroes but they do not know each other's identities.', networks= netformandalorian)
     #Show.objects.create(title='Dark',release_date= '2017-01-12 00:00:00', description='When two children go missing in a small German town, its sinful past is exposed along with the double lives and fractured relationships that exist among four families as they search for the kids. The mystery-drama series introduces an intricate puzzle filled with twists that includes a web of curious characters, all of whom have a connection to the town's troubled history -- whether they know it or not. The story includes supernatural elements that tie back to the same town in 1986.', networks= netforgumball)
     #Show.objects.create(title='Stranger Things',release_date= '2016-07-15 00:00:00', description='In 1980s Indiana, a group of young friends witness supernatural forces and secret government exploits. As they search for answers, the children unravel a series of extraordinary mysteries.', networks= netforgumball)
+
+
+        

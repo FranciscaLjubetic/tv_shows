@@ -3,15 +3,34 @@
 {% block title %}Tv_Show {% endblock %}
 
 {% block content %}
-<div class="container bg-secondary text-white p-2 ms-2">
-    <h1 class="p-0 mb-4 display-5 text-white">Tv Show: {{this_show.title}}</h1>
-    <h3>Network: {{this_show.networks.title}}</h3>
-    <h3>Release: {{this_show.release_date}}</h3>
-    <h3>Description:</h3>
-    <p>{{this_show.description}}</p>
-    <span>Last Update:{{this_show.updated_at}}</span>
+<div class="container bg-secondary text-white p-2">
+    <div class="row p-2">
+        <div class="offset-1 col-9">
+            <h4 class="p-0 mb-4 display-5 text-white mt-3">Tv Show: {{this_show.title}}</h4>
+            <h6>Network: </h6>
+            <h6 class="fw-bolder">
+                {{this_show.networks.title}}
+            </h6>
+            <h6>Release: </h6>
+            <h6 class="fw-bolder">
+                {{this_show.release_date}}
+            </h6>
 
-    <a href="shows/{{this_show.id}}/edit">Edit</a> <a href="shows/{{this_show.id}}/delete">Delete</a>
+        </div>
+    </div>
+    <div class="row p-2">
+        <div class="col-6 offset-1">
+            <h6>Description:</h6>
+            <p class="bg-light border border-muted text-dark p-2" style="min-height:150px; min-width:200px;">{{this_show.description}}</p>
+        </div>
+    </div>
+    <div class="row p-2">
+        <div class="col-6 offset-1">
+            <p>Last Update:  {{this_show.updated_at}}</p>
+
+            <a class="text-white" href="/shows/{{this_show.id}}/edit">Edit</a> <a class="text-white" href="/shows/{{this_show.id}}/delete">Delete</a>
+        </div>
+    </div>
 </div>
 
 {% endblock %}  

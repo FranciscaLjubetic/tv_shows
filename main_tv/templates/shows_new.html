@@ -5,9 +5,9 @@
 {% block content %}
 <form id="form" class="offset-1 col-10 bg-secondary text-white" method="POST" action="/shows/create">
     {% csrf_token %}
-    <div class="row ps-2">
+    <div class="row p-2">
         <div class="col-6 m-2">
-        <h4 class="p-0 mb-4 display-5 text-white">Add a Show</h4>
+        <h4 class="mb-4 display-5 text-white">Add a Show</h4>
             <p class="mb-0">Title</p>
             <input name="title_input" type="text" class="validate form-control input-index input-index" required>
         </div>
