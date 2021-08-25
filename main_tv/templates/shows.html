@@ -3,7 +3,11 @@
 {% block title %}Shows{% endblock %}
     
 
-    {% block content %}
+{% block content %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <a class = "d-none" href="https://icons8.com/icon/78581/delete-bin">Delete Bin icon by Icons8</a>
+    <a class = "d-none" href="https://icons8.com/icon/1YHGp441cRMq/edit">Edit icon by Icons8</a>
+    <a class = "d-none" href="https://icons8.com/icon/VNGluvySmxmA/search">Search icon by Icons8</a>
     <div class="container bg-secondary text-white offset-1 col-10">
         <h4 class="p-2 mb-4 display-5 text-white ms-2 mt-3">All shows</h4>
         <table class="table table-hover">
@@ -23,11 +27,26 @@
                     <td>{{show.title}}</td>
                     <td>{{show.networks.title}}</td>
                     <td>{{show.release_date}}</td>
-                    <td><a value="num" href="/shows/{{show.id}}">View</a> <a href="/shows/{{show.id}}/edit"> Edit </a> <a href="/shows/{{show.id}}/delete"> Delete </a></td>
+                    <td><a class="text-white m-2" value="num" href="/shows/{{show.id}}"><img  src="https://img.icons8.com/ios-filled/25/000000/search--v3.png"/></a> <a  class="text-white m-2" href="/shows/{{show.id}}/edit"> <img src="https://img.icons8.com/material-rounded/24/000000/edit--v2.png"/></a> <a class="m-2 deletebtn" type="button" data-toggle="modal" data-target="#myModal"  href="/shows/{{show.id}}/delete"><img src="https://img.icons8.com/ios-glyphs/30/000000/delete-forever.png"/></a></td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
         <a href="/shows/new" class="btn btn-dark ms-1 mb-4">Add a new show</a>
     </div>
-    {% endblock %}
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $('.deletebtn').on('click',function(evento){
+            evento.preventDefault();
+            const href =$(this).attr('href');
+            console.log(href);
+            const yes= confirm('Are you sure to delete this show?');
+            if (yes){
+                window.location= href
+            };
+        })
+    </script>
+{% endblock %}
+
