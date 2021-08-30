@@ -8,7 +8,14 @@
     {% csrf_token %}
     <div class="row p-2">
         <div class="col-6 m-2">
-        <h4 class="mb-4 display-5 text-white">Add a Show</h4>
+        <h4 class="p-0 mb-4 display-5 text-white mt-3">Add a Show</h4>
+            <!--{% if messages %}
+            <ul class="messages text-white fw-bolder bg-danger">    
+                {% for message in messages %}    
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                {% endfor %}
+            </ul>
+            {% endif %}-->
             <p class="mb-0">Title</p>
             <input name="title_input" type="text" class="validate form-control input-index input-index">
         </div>
@@ -30,7 +37,7 @@
             <p class="mb-0">Release Date</p>
             <input type="date" id="start" name="release_date" class="form-control input-index mx-auto"
             value="2008-01-01"
-            min="2008-01-01" max="2021-12-31">
+            min="1990-01-01" max="2021-12-31">
         </div>
     </div>
     <div class="row ps-2">
@@ -45,13 +52,6 @@
             <button type="submit" class="btn btn-dark" required>Create</button>
         </div>
     </div>
-    {% if messages %}
-        <ul class="messages">    
-            {% for message in messages %}    
-                <li {% if message.tags %} class="{{ message.tags }}"{% endif %} style="background-color: orangered;">{{ message }}</li>    
-            {% endfor %}
-        </ul>
-    {% endif %}
 </form>
 <script>
     $("#network_input").on("change", function () {

@@ -8,8 +8,8 @@ class Tvshows_manager(models.Manager):
         errors ={}
         #today = date.today()
 
-        if len(post_data['title_input']) < 10:
-            errors['title_input'] = 'Title should have at least ten characters'
+        if len(post_data['title_input']) < 4:
+            errors['title_input'] = 'Title should have at least four characters'
         
         if len(post_data['desc_input']) < 30:
             errors['desc_input'] = 'Description should have at least 10 characters'
@@ -25,6 +25,27 @@ class Tvshows_manager(models.Manager):
             errors['release_date'] = 'You should pick a date'
             
             
+        return errors
+    
+class Users_manager(models.Manager):
+    
+    def basic_validator(self, post_data):
+        errors ={}
+        #today = date.today()
+
+        if len(post_data['name']) < 4:
+            errors["name"] = "Name should have at least 4 characters"
+        
+        if len(post_data['email']) < 4:
+            errors["email"] = "Email should have at least 4 characters"
+        
+        if len(post_data['password']) < 6:
+            errors['password'] = 'Password should have at least 6 characters'
+        
+        if post_data['password']!= post_data['password_confirm']:
+            errors['password'] = 'Passwords do not match'
+        
+        
         return errors
     '''
     def basic_validator_for_create(self, post_data):
@@ -72,13 +93,17 @@ class Show(models.Model):
     def __repr__(self):  
         return f"<Movie object: {self.title} ({self.id})>"
 
-class User(models.Model):
+class Users(models.Model):
     name = models.CharField(max_length= 255, unique= True)
-    email = models.EmailField(max_length = 50)
+    email = models.EmailField(max_length = 50, unique= True)
     password  = models.CharField(max_length= 14, unique = True)
     allowed = models.BooleanField(default =True)
-    #avatar = models.URLField(default='https://p4.wallpaperbetter.com/wallpaper/101/934/380/avatar-anime-avatar-the-last-airbender-aang-avatar-wallpaper-preview.jpg')
+    avatar = models.URLField(
+        default='https://www.pngkey.com/png/full/331-3315307_our-insert-name-here-meme.png')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
-        
+    objects = Users_manager()
+    
+    def __repr__(self) -> str:
+        return f'{self.id}: {self.name}' 

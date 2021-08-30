@@ -1,7 +1,9 @@
+import bcrypt
 from django.shortcuts import render, redirect, HttpResponse
-from main_tv.models import Show, Network, User
+from main_tv.models import Show, Network, Users
 from django.contrib import messages
 from django.db import IntegrityError
+from .decorators import *
 
 def index(request):
     context = {
@@ -9,7 +11,7 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
-
+@login_protect
 def shows(request):
     Shows= Show.objects.all()
     networks = Network.objects.all()
@@ -20,7 +22,7 @@ def shows(request):
     }
     return render(request,'shows.html', context)
 
-
+@login_protect
 def addshow(request):
     Shows= Show.objects.all()
     networks = Network.objects.all()
@@ -31,7 +33,7 @@ def addshow(request):
     }
     return render(request, 'shows_new.html', context)
 
-
+@login_protect
 def create(request):
     errors = Show.objects.basic_validator(request.POST)
     network = None
@@ -61,7 +63,7 @@ def create(request):
     
 
 
-
+@login_protect
 def editshow(request, num):
     edit_show = Show.objects.get(id= int(num))
     Networks = Network.objects.all()
@@ -107,7 +109,7 @@ def editshow(request, num):
         
         return redirect('/shows')
 
-
+@login_protect
 def tvshow(request, num):
     this_show = Show.objects.get(id= num)
     context = {
@@ -117,7 +119,7 @@ def tvshow(request, num):
     
     return render(request, 'tv_show.html', context)
 
-
+@login_protect
 def delete(request, num):
     show_id= Show.objects.get(id= num)
     show_id.delete()
@@ -130,7 +132,7 @@ def second(request, name):
 def register(request):
     if request.method == 'GET':
         context = {
-            'users': User.objects.all(),
+            'users': Users.objects.all(),
         }
         return render(request, 'register.html')
     
@@ -140,26 +142,60 @@ def register(request):
         password =request.POST['password']
         password_confirm=request.POST['password_confirm']
         
+        
+    errors = Users.objects.basic_validator(request.POST)
+    if len(errors) > 0:
+        for llave, error_message in errors.items():
+            messages.error(request, error_message)
+        return redirect('/register')
         #avatar =request.POST['avatar']
+    '''
     if password != password_confirm:
         messages.errorr(request, 'Passwords don´t match. Try again')
-        return redirect('/register')
+        return redirect('/register') ahora la validacion la hago en el validador
+    '''
         
-    user = User.objects.create(
+    user = Users.objects.create(
         name = name,
         email= email,
-        password = password,
+        password = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
     )
-    
     request.session['user']={
         'id': user.id,
         'name': user.name,
         'email': user.email,
-        'password': user.password
+        'avatar': user.avatar
     }
-    messages.success(request, 'User succesfully created')
+    messages.success(request, 'User successfully created')
     return redirect('/shows')
 
 def logout(request):
-    request.session['user'] = None
+    del request.session['user'] 
     return redirect('/register')
+
+def login(request):
+    email = request.POST['email']
+    password = request.POST['password']
+    try:
+        user = Users.objects.get(email=email)
+    except Users.DoesNotExist:
+        messages.error(request, 'User does not exist')
+        return redirect('/register')
+    
+    # si llegamos acá, estamos seguros que al  menos el usuario SI existe
+    if  not bcrypt.checkpw(password.encode(), user.password.encode()): 
+        messages.error(request, 'User or Password are wrong')
+        return redirect('/register')
+    
+    # si llegamos hasta acá, estamos seguros que es el usuario y la contraseña está correcta
+    request.session['user'] = {
+        'id': user.id,
+        'name': user.name,
+        'email': user.email,
+        'avatar': user.avatar
+    }
+    messages.success(request, f'Hello, {user.name}')
+    return redirect('/shows')
+        
+    
+    
