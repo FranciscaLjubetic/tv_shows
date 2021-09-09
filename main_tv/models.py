@@ -47,12 +47,15 @@ class Users_manager(models.Manager):
         
         
         return errors
-    '''
-    def basic_validator_for_create(self, post_data):
+    
+
+
+class Shows_manager(models.Manager):
+    def basic_validator(self, post_data):
         errors ={}
         #today = date.today()
-        if len(post_data['new_network_name']) < 2 & len(post_data['new_network_name']) > 20:
-            errors['new_network_name'] = 'IGDAF'
+        if len(post_data['newNetwork']) < 2 or 20 < len(post_data['newNetwork']): 
+            errors['newNetwork'] = 'IGDAF'
 
         if len(post_data['title_input']) < 2:
             errors['title_input'] = 'Title should have at least two characters'
@@ -68,7 +71,7 @@ class Users_manager(models.Manager):
             
         return errors 
         
-    '''
+    
     
     
 
@@ -88,7 +91,7 @@ class Show(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     networks = models.ForeignKey(Network, related_name="curr_shows", on_delete = models.CASCADE)
-    objects = Tvshows_manager()
+    objects = Shows_manager()
 
     def __repr__(self):  
         return f"<Movie object: {self.title} ({self.id})>"
